@@ -3,7 +3,7 @@ var parser = require('body-parser');
 
 var {mongoose} = require('./db/mongoose');
 var {Todo} = require('./model/todo');
-var {Usuario} = require('./model/usuario');
+
 
 var app = express();
 app.use(parser.json());
@@ -19,3 +19,4 @@ app.post('/todos', (req, res, next) => {
 app.listen(3000, () => {
     console.log('puerto 3000!');
 });
+module.exports = {app};
