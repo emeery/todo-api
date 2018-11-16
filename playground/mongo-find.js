@@ -21,8 +21,8 @@ MongoClient.connect('mongodb://127.0.0.1:27017/TodoApp', (err, db) => {
     db.collection('Usuarios').find({
         nombre: 'Gerardo'
     }).toArray()
-    .then( docs => {
-        console.log(JSON.stringify(docs, undefined, 2));
+    .then( documentos => {
+        console.log(JSON.stringify(documentos, undefined, 2));
     }, (err) => {
         console.log('no se puede conectar con mongo');
     });
