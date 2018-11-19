@@ -5,6 +5,7 @@ var {Todo} = require('./model/todo');
 const {ObjectID} = require('mongodb');
 
 var app = express();
+const puerto = process.env.PORT || 3000;
 
 app.use(parser.json());
 app.post('/todos', (req, res, next) => {
@@ -31,7 +32,7 @@ app.get('/todos/:id', (req, res) => {
         res.send({todo});
     }).catch(e => { res.status(400).send(e) });
 });
-app.listen(3000, () => {
-    console.log('puerto 3000!');
+app.listen(puerto, () => {
+    console.log(`puerto: ${puerto}`);
 });
 module.exports = {app};
