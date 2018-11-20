@@ -1,3 +1,4 @@
+const _ = require('lodash');
 var express = require('express'); 
 var parser = require('body-parser');
 var {mongoose} = require('./db/mongoose'); 
@@ -41,6 +42,24 @@ app.delete('/todos/:id', (req, res) => {
         if(!todo) { return res.status(404).send(); }
         res.send({todo});
     }).catch(e => { res.status(400).send(e) });
+});
+app.patch('/todos/:id', (req, res) => {
+    var id = req.params.id;
+    var body = _.pick(req.body, ['tarea', 'completado']);
+    if(!ObjectID.isValid(id)) { 
+        return res.status(404).send();  
+    }
+    if(_.isBoolean(body.completado) && body.completado) {
+        body.completadoEn = new Date().getTime();
+    } else {
+        body.completado = false;
+        body.completado = null;
+    }
+    Todo.findByIdAndUpdate(id, {$set: body}, {$new: true})
+    .then(todo => {
+        if(!todo) { res.status(404).send(); }
+        res.send({todo});
+    }).catch(e => res.status(404).send());
 });
 
 app.listen(puerto, () => {
