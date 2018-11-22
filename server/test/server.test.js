@@ -143,17 +143,17 @@ describe('PATCH /todos/:id', () => {
 
   it('should clear completedAt when todo is not completed', (done) => {
     var hexId = todos[1]._id.toHexString();
-    var text = 'This should be the new text!!';
+    var tarea = 'This should be the new text!!';
 
     request(app)
       .patch(`/todos/${hexId}`)
       .send({
         completed: false,
-        text
+        tarea
       })
       .expect(200)
       .expect((res) => {
-        expect(res.body.todo.tarea).toBe(text);
+        expect(res.body.todo.tarea).toBe(tarea);
         expect(res.body.todo.completado).toBe(false);
         expect(res.body.todo.completadoEn).toNotExist();
       })
