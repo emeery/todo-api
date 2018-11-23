@@ -123,7 +123,7 @@ describe('DELETE todos/:id', () =>{
     });
 });
 describe('PATCH /todos/:id', () => {
-  it('should update the todo', (done) => {
+  it('deberia actuali the todo', (done) => {
     var hexId = todos[0]._id.toHexString();
     var tarea = 'This should be the new text';
     request(app)

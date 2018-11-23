@@ -35,6 +35,7 @@ app.get('/todos/:id', (req, res) => {
 });
 app.delete('/todos/:id', (req, res) => {
     var id = req.params.id;
+    console.log(id);
     if(!ObjectID.isValid(id)) { 
         return res.status(404).send();  
     }
@@ -53,9 +54,9 @@ app.patch('/todos/:id', (req, res) => {
         body.completadoEn = new Date().getTime();
     } else {
         body.completado = false;
-        body.completado = null;
+        body.completadoEn = null;
     }
-    Todo.findByIdAndUpdate(id, {$set: body}, {$new: true})
+    Todo.findByIdAndUpdate(id, {$set: body}, {new: true})
     .then(todo => {
         if(!todo) { res.status(404).send(); }
         res.send({todo});
